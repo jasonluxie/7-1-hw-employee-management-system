@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
-// const mysql12 = require('mysql2')
-const { menu, addEmp, addDep, addRole } = require("../questions/questions");
-const { viewDataTables, addToDatabase } = require("../helpers/mysql2Helper");
+const { menu } = require("../questions/questions");
+const { viewDataTablesOrAddToTables } = require("../helpers/mysql2Helper");
 
 const init = () => {
     console.log("hello");
@@ -10,26 +9,16 @@ const init = () => {
         .then((response) => {
             switch (response.menuSelect) {
                 case "View departments":
-                    viewDataTables(response.menuSelect);
-                    break;
                 case "View roles":
-                    viewDataTables(response.menuSelect);
-                    break;
                 case "View employees":
-                    viewDataTables(response.menuSelect);
-                    break;
                 case "Add a department":
-                    addToDatabase(response.menuSelect);
-                    break;
                 case "Add a role":
-                    addToDatabase(response.menuSelect);
-                    break;
                 case "Add an employee":
-                    addToDatabase(response.menuSelect);
+                    viewDataTablesOrAddToTables(response.menuSelect);
                     break;
-                case "Update an employee role":
-                    break;
+                    case "Update an employee role":
                 case "Exit":
+                    return console.log("Bye!")
                     break;
             }
         })
@@ -39,7 +28,5 @@ const init = () => {
             }
         });
 };
-
-init();
 
 module.exports = init
