@@ -1,3 +1,3 @@
-const inquiHelper = require('./assets/helpers/inquiHelper')
+const init = require('./assets/helpers/inquiHelper')
 
-inquiHelper()
+init()

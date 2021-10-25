@@ -22,6 +22,11 @@ const addDep = [
         name: "depName",
         message: "What is the name of the department?",
     },
+    {
+        type: "input",
+        name: "depID", 
+        message: "What is the id of the department?"
+    }
 ];
 const addRole = [
     {
@@ -40,6 +45,28 @@ const addRole = [
         message: "What department does the role belong to?",
     },
 ];
+const addEmp = [
+    {
+        type: "input",
+        name: "empFirstName",
+        message: "What is the first name of the employee?",
+    },
+    {
+        type: "input",
+        name: "empLastName",
+        message: "What is the last name of the employee?",
+    },
+    {
+        type: "input",
+        name: "empRole",
+        message: "What is the role of the employee?",
+    },
+    {
+        type: "input",
+        name: "empManager",
+        message: "Who is the manager of the employee?",
+    },
+];
 const updateEmp = [
     {
         type: "input",
@@ -50,7 +77,6 @@ const updateEmp = [
         type: "input",
         name: "empNewRole",
         message: "What is the new role of the employee?",
-    }
-]
-
+    },
+];
 module.exports = { menu, addEmp, addDep, addRole, updateEmp };

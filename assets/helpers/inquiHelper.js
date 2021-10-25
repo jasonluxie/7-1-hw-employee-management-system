@@ -14,12 +14,14 @@ const init = () => {
                 case "Add a department":
                 case "Add a role":
                 case "Add an employee":
-                    viewDataTablesOrAddToTables(response.menuSelect);
+                    viewDataTablesOrAddToTables(response.menuSelect)
+                    // init();
                     break;
                 case "Update an employee role":
                     break;
                 case "Exit":
-                    return console.log("Bye!")
+                    console.log("Bye!")
+                    process.exit(0)
             }
         })
         .catch((err) => {
