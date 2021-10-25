@@ -1,12 +1,15 @@
 const inquirer = require("inquirer");
 const { addEmp, addDep, addRole } = require("../questions/questions");
+const { Department, Role, Employee } = require("./classHelper")
 
-const add = (input) => {
+const addCase = (input) => {
     switch (input) {
         case "Add a department":
             inquirer
-            .prompt(addEmp)
-            .then()
+            .prompt(addDep)
+            .then(response => {
+                const newDep = new Department(response.depName, response.depID)
+            })
             .catch((err) => {
                 if (err) {
                     console.error(err);
@@ -15,8 +18,10 @@ const add = (input) => {
             break;
         case "Add a role":
             inquirer
-            .prompt(addDep)
-            .then()
+            .prompt(addRole)
+            .then(response => {
+                const newRole = new Role(response.roleName, response.roleSalary, response.roleDep)
+            })
             .catch((err) => {
                 if (err) {
                     console.error(err);
@@ -25,8 +30,11 @@ const add = (input) => {
             break;
         case "Add an employee":
             inquirer
-            .prompt(addRole)
-            .then()
+            .prompt(addEmp)
+            .then(response => {
+                const newEmp = new Employee(response.empFirstName, response.empLastName, response.empRole, response.empManager)
+                console.log(newEmp)
+            })
             .catch((err) => {
                 if (err) {
                     console.error(err);
@@ -35,3 +43,7 @@ const add = (input) => {
             break;
     }
 };
+
+addCase("Add an employee")
+
+module.exports = { addCase }
