@@ -27,42 +27,45 @@ const viewDataTablesOrAddToTables = (input) => {
             });
             break;
         case "Add a department":
-            inquirer.prompt(addDep).then((response) => {
+            inquirer.prompt(addDep).then((r) => {
                 connection.query(
-                    "insert into department(dept_id, name) values (?, ?)",
-                    [dept_id, dept_name],
+                    `insert into department(dept_id, name) values ("${r.depID}", "${r.depName}");`,
                     (err, results) => {
                         if (err) {
                             console.error(err);
-                        } else console.table(results);
+                        } else console.log("Department successfully added.");
                     }
                 );
             });
             break;
         case "Add a role":
-            connection.query(
-                "insert into role(role_id, title, salary, department_id_fk) values (?, ?, ?, ?)",
-                [role_id, title, salary, department_id_fk],
-                (err, results) => {
-                    if (err) {
-                        console.error(err);
-                    } else console.table(results);
-                }
-            );
+            inquirer.prompt(addRole).then((r) => {
+                connection.query(
+                    `insert into role(title, salary, department_id_fk) values ("${r.roleName}","${r.roleSalary}","${r.roleDep}")`,
+                    (err, results) => {
+                        if (err) {
+                            console.error(err);
+                        } else console.log("Role successfully added.");
+                    }
+                );
+            });
             break;
         case "Add an employee":
-            connection.query(
-                "insert into role(emp_id, first_name, last_name, role_id_fk, manager_id_fk) values (?, ?, ?, ?, ?, ?)",
-                [emp_id, first_name, last_name, role_id_fk, manager_id_fk],
-                (err, results) => {
-                    if (err) {
-                        console.error(err);
-                    } else console.table(results);
-                }
-            );
+            inquirer.prompt(addEmp).then((r) => {
+                connection.query(
+                    `insert into employee(first_name, last_name, role_id_fk, manager_id_fk) values ("${r.empFirstName}", "${r.empLastName}", "${r.empRole}". ${r.empManager})`,
+                    (err, results) => {
+                        if (err) {
+                            console.error(err);
+                        } else console.log("Employee successfully added");
+                    }
+                );
+            });
             break;
     }
 };
+
+const updateEmployee = () => {}
 
 // module.exports = { viewDataTables, addToDatabase, createDatabaseAndTables };
 module.exports = { viewDataTablesOrAddToTables };

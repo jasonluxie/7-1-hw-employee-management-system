@@ -14,8 +14,7 @@ const init = () => {
                 case "Add a department":
                 case "Add a role":
                 case "Add an employee":
-                    viewDataTablesOrAddToTables(response.menuSelect)
-                    // init();
+                    viewDataTablesOrAddToTables(response.menuSelect);
                     break;
                 case "Update an employee role":
                     break;

@@ -21,11 +21,6 @@ const addDep = [
         type: "input",
         name: "depName",
         message: "What is the name of the department?",
-    },
-    {
-        type: "input",
-        name: "depID", 
-        message: "What is the id of the department?"
     }
 ];
 const addRole = [
@@ -42,7 +37,7 @@ const addRole = [
     {
         type: "input",
         name: "roleDep",
-        message: "What department does the role belong to?",
+        message: "What is the ID of department does the role belong to?",
     },
 ];
 const addEmp = [
@@ -59,12 +54,12 @@ const addEmp = [
     {
         type: "input",
         name: "empRole",
-        message: "What is the role of the employee?",
+        message: "What is the role ID that corresponds to the role of the employee?",
     },
     {
         type: "input",
         name: "empManager",
-        message: "Who is the manager of the employee?",
+        message: "What is the employee ID of their manager? This can be left blank."
     },
 ];
 const updateEmp = [
