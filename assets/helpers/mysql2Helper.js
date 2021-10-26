@@ -1,6 +1,11 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
-const { addEmp, addDep, addRole } = require("../questions/questions");
+const {
+    addEmp,
+    addDep,
+    addRole,
+    updateEmp,
+} = require("../questions/questions");
 const cTable = require("console.table");
 const init = require("./inquiHelper");
 const connection = mysql.createConnection({
@@ -47,7 +52,7 @@ const viewDataTablesOrAddToTables = (input, callback) => {
                     (err, results) => {
                         if (err) {
                             console.error(err);
-                        } else console.log("Role successfully added.")
+                        } else console.log("Role successfully added.");
                         callback();
                     }
                 );
@@ -56,11 +61,25 @@ const viewDataTablesOrAddToTables = (input, callback) => {
         case "Add an employee":
             inquirer.prompt(addEmp).then((r) => {
                 connection.query(
-                    `insert into employee(first_name, last_name, role_id_fk, manager_id_fk) values ("${r.empFirstName}", "${r.empLastName}", "${r.empRole}". ${r.empManager})`,
+                    `insert into employee(first_name, last_name, role_id_fk, manager_id_fk) values ("${r.empFirstName}", "${r.empLastName}", "${r.empRole}", ${r.empManager})`,
                     (err, results) => {
                         if (err) {
                             console.error(err);
-                        } else console.log("Employee successfully added")
+                        } else console.log("Employee successfully added");
+                        callback();
+                    }
+                );
+            });
+            break;
+        case "Update an employee role":
+            inquirer.prompt(updateEmp).then((r) => {
+                connection.query(
+                    `update employee set role_id_fk = "${r.empNewRole}" where "emp_id" = "${r.empSelect}"`,
+                    (err, results) => {
+                        if (err) {
+                            console.error(err);
+                        } else console.log("Employee successfully updated")
+                        console.log(results);
                         callback();
                     }
                 );
@@ -69,7 +88,4 @@ const viewDataTablesOrAddToTables = (input, callback) => {
     }
 };
 
-const updateEmployee = () => {};
-
-// module.exports = { viewDataTables, addToDatabase, createDatabaseAndTables };
-module.exports = { viewDataTablesOrAddToTables, updateEmployee };
+module.exports = { viewDataTablesOrAddToTables };

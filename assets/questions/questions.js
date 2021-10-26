@@ -66,12 +66,12 @@ const updateEmp = [
     {
         type: "input",
         name: "empSelect",
-        message: "Which employee would you like to update?",
+        message: "What is the id of the employee you wish to update?",
     },
     {
         type: "input",
         name: "empNewRole",
-        message: "What is the new role of the employee?",
+        message: "What is the id of the role you want to update to?",
     },
 ];
 module.exports = { menu, addEmp, addDep, addRole, updateEmp };
