@@ -22,7 +22,7 @@ npm install console.table --save
 
 ## Demo
 
-Click [here]() for video demonstration
+Click [here](https://watch.screencastify.com/v/O24R3GGo8hbBkDPP3Qht) for video demonstration
 
 ## Further Development
 
