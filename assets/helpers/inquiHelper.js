@@ -1,12 +1,16 @@
 const inquirer = require("inquirer");
 const { menu } = require("../questions/questions");
-const  { viewDataTablesOrAddToTables } = require("../helpers/mysql2Helper");
+const {
+    viewDataTablesOrAddToTables,
+    // viewEmployeesByManagerOrDepartment,
+    // viewBudgetOfDepartment,
+} = require("../helpers/mysql2Helper");
 
 const init = () => {
     inquirer
         .prompt(menu)
         .then((response) => {
-            console.log(response.menuSelect)
+            console.log(response.menuSelect);
             switch (response.menuSelect) {
                 case "View departments":
                 case "View roles":
@@ -15,11 +19,18 @@ const init = () => {
                 case "Add a role":
                 case "Add an employee":
                 case "Update an employee role":
-                    viewDataTablesOrAddToTables(response.menuSelect, init)
+                case "Update an employee's manager":
+                    viewDataTablesOrAddToTables(response.menuSelect, init);
                     break;
+                // case "View employees by manager":
+                // case "View employees by department":
+                //     viewEmployeesByManagerOrDepartment(response.menuSelect, init);
+                //     break;
+                // case "View department total budgets":
+                //     viewBudgetOfDepartment(response.menuSelect, init)
                 case "Exit":
-                    console.log("Bye!")
-                    process.exit(0)
+                    console.log("Bye!");
+                    process.exit(0);
             }
         })
         .catch((err) => {
@@ -29,4 +40,4 @@ const init = () => {
         });
 };
 
-module.exports = init
+module.exports = init;

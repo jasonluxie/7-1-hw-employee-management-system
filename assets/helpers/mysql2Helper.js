@@ -4,7 +4,8 @@ const {
     addEmp,
     addDep,
     addRole,
-    updateEmp,
+    updateEmpID,
+    updateEmpManager,
 } = require("../questions/questions");
 const cTable = require("console.table");
 const init = require("./inquiHelper");
@@ -72,20 +73,76 @@ const viewDataTablesOrAddToTables = (input, callback) => {
             });
             break;
         case "Update an employee role":
-            inquirer.prompt(updateEmp).then((r) => {
+            inquirer.prompt(updateEmpID).then((r) => {
                 connection.query(
-                    `update employee set role_id_fk = "${r.empNewRole}" where "emp_id" = "${r.empSelect}"`,
+                    `update employee set role_id_fk = ${r.empNewRole} where emp_id = ${r.empSelect};`,
                     (err, results) => {
                         if (err) {
                             console.error(err);
-                        } else console.log("Employee successfully updated")
-                        console.log(results);
+                        } else console.log("Employee successfully updated");
                         callback();
                     }
                 );
             });
             break;
+        case "Update an employee's manager":
+            inquirer.prompt(updateEmpManager).then((r) => {
+                connection.query(
+                    `update employee set manager_id_fk = ${r.empManID} where emp_id = ${r.empID}`,
+                    (err, results) => {
+                        if (err) {
+                            console.error(err);
+                        } else
+                            console.log(
+                                "Employee manager successfully updated"
+                            );
+                        callback();
+                    }
+                );
+            });
     }
 };
 
-module.exports = { viewDataTablesOrAddToTables };
+// const viewEmployeesByManagerOrDepartment = (input, callback) => {
+//     connection.query("USE employees_db;");
+//     switch (input) {
+//         case "View employees by manager":
+//             connection.query(
+//                 `select employee.manager_id_fk, emp_id from employee left join employee on manager_id_fk = emp_id;`,
+//                 (err, results) => {
+//                     if (err) {
+//                         console.error(err);
+//                     } else console.table(results);
+//                     callback();
+//                 }
+//             );
+//             break;
+
+//         case "View employees by department":
+//             connection.query(
+//                 `select employee.emp_id, department.id from employee left join department on `,
+//                 (err, results) => {
+//                     if (err) {
+//                         console.error(err);
+//                     } else console.table(results);
+//                     callback();
+//                 }
+//             );
+//             break;
+//     }
+// };
+// const viewBudgetOfDepartment = (input, callback) => {
+//     connection.query("USE employees_db;");
+//     switch (input) {
+//         case value:
+//             break;
+
+//         default:
+//             break;
+//     }
+// };
+module.exports = {
+    viewDataTablesOrAddToTables,
+    // viewEmployeesByManagerOrDepartment,
+    // viewBudgetOfDepartment,
+};
