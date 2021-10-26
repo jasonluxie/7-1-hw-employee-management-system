@@ -68,4 +68,4 @@ const viewDataTablesOrAddToTables = (input) => {
 const updateEmployee = () => {}
 
 // module.exports = { viewDataTables, addToDatabase, createDatabaseAndTables };
-module.exports = { viewDataTablesOrAddToTables };
+module.exports = { viewDataTablesOrAddToTables, updateEmployee };
