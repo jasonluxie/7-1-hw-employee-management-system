@@ -8,7 +8,6 @@ const {
     updateEmpManager,
 } = require("../questions/questions");
 const cTable = require("console.table");
-const init = require("./inquiHelper");
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -36,7 +35,7 @@ const viewDataTablesOrAddToTables = (input, callback) => {
         case "Add a department":
             inquirer.prompt(addDep).then((r) => {
                 connection.query(
-                    `insert into department(dept_id, name) values ("${r.depID}", "${r.depName}");`,
+                    `insert into department(name) values ("${r.depName}");`,
                     (err, results) => {
                         if (err) {
                             console.error(err);
@@ -49,7 +48,7 @@ const viewDataTablesOrAddToTables = (input, callback) => {
         case "Add a role":
             inquirer.prompt(addRole).then((r) => {
                 connection.query(
-                    `insert into role(title, salary, department_id_fk) values ("${r.roleName}","${r.roleSalary}","${r.roleDep}")`,
+                    `insert into role(title, salary, department_id_fk) values ("${r.roleName}",${r.roleSalary},${r.roleDep})`,
                     (err, results) => {
                         if (err) {
                             console.error(err);
@@ -62,7 +61,7 @@ const viewDataTablesOrAddToTables = (input, callback) => {
         case "Add an employee":
             inquirer.prompt(addEmp).then((r) => {
                 connection.query(
-                    `insert into employee(first_name, last_name, role_id_fk, manager_id_fk) values ("${r.empFirstName}", "${r.empLastName}", "${r.empRole}", ${r.empManager})`,
+                    `insert into employee(first_name, last_name, role_id_fk, manager_id_fk) values ("${r.empFirstName}", "${r.empLastName}", ${r.empRole}, ${r.empManager})`,
                     (err, results) => {
                         if (err) {
                             console.error(err);
