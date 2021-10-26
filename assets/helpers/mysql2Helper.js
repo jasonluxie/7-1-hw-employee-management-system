@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
     databse: "employees_db",
 });
 
-const viewDataTablesOrAddToTables = (input) => {
+const viewDataTablesOrAddToTables = (input, callback) => {
     let inputArr = input.split(" ");
     let choiceArr = inputArr[inputArr.length - 1].split("");
     let choiceWordArr = choiceArr.slice(0, choiceArr.length - 1);
@@ -24,6 +24,7 @@ const viewDataTablesOrAddToTables = (input) => {
                 if (err) {
                     console.error(err);
                 } else console.table(results);
+                callback();
             });
             break;
         case "Add a department":
@@ -34,6 +35,7 @@ const viewDataTablesOrAddToTables = (input) => {
                         if (err) {
                             console.error(err);
                         } else console.log("Department successfully added.");
+                        callback();
                     }
                 );
             });
@@ -45,7 +47,8 @@ const viewDataTablesOrAddToTables = (input) => {
                     (err, results) => {
                         if (err) {
                             console.error(err);
-                        } else console.log("Role successfully added.");
+                        } else console.log("Role successfully added.")
+                        callback();
                     }
                 );
             });
@@ -57,7 +60,8 @@ const viewDataTablesOrAddToTables = (input) => {
                     (err, results) => {
                         if (err) {
                             console.error(err);
-                        } else console.log("Employee successfully added");
+                        } else console.log("Employee successfully added")
+                        callback();
                     }
                 );
             });
@@ -65,7 +69,7 @@ const viewDataTablesOrAddToTables = (input) => {
     }
 };
 
-const updateEmployee = () => {}
+const updateEmployee = () => {};
 
 // module.exports = { viewDataTables, addToDatabase, createDatabaseAndTables };
 module.exports = { viewDataTablesOrAddToTables, updateEmployee };
